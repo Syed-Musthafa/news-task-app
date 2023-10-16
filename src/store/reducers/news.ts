@@ -16,11 +16,9 @@ const initialState: InitialState = {
 }
 
 
-
-
 export const fetchNewsData = createAsyncThunk('post/fetchNewsData', async() => {
     return axios
-        .get('https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=9b64bcfe576047ba8e5bb7fd24c9e526')
+        .get('https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=9b64bcfe576047ba8e5bb7fd24c9e526')
         .then(response =>response.data)
       
         .catch(err => console.log(err)

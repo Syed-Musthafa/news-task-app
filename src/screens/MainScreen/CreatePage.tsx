@@ -2,10 +2,6 @@ import { Image, SafeAreaView, StyleSheet, Text, Alert, TouchableOpacity, View, L
 import React, { useCallback, useEffect, useState } from 'react'
 import { Colors, Images } from '../../constant'
 
-
-
-
-
 const CreatePage = ({route, navigation}) => {
 
   
@@ -19,12 +15,9 @@ const CreatePage = ({route, navigation}) => {
   }, [])
 
 
-  console.log("newsData", newsData);
-  
-
   function renderHeaderBar() {
     return (
-        <View style={{ padding: 10, marginTop: 10 }}>
+        <View style={{ padding: 10, marginTop: 20 }}>
             <View
                 style={[{ flexDirection: 'row', justifyContent: 'space-between', padding: 10 }]}>
                 <TouchableOpacity
@@ -46,14 +39,7 @@ const CreatePage = ({route, navigation}) => {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={{
-                        // width: 45,
-                        // height: 45,
-                        // backgroundColor:  Colors.secondary,
-                        // borderRadius: 10,
-                        // justifyContent: 'center',
-                        // alignItems: 'center',
-                    }}
+                  
                 >
                        <Image
                         source={Images.profile}
@@ -75,17 +61,23 @@ function renderNewsProfile() {
   return (
       <View>
           <View style={{
-
               width: '100%',
               height: 140,
               borderRadius: 30,
+              padding: 10
           }}>
-              <View style={{ flex: 1, flexDirection: 'row', width: '100%', padding: 10}}>
+              <View style={{  flexDirection: 'row', width: '100%',}}>
                   <View >
                       <Text style={{ color: Colors.white, fontSize: 18 }}>{newsData.title}</Text>
-                      <Text style={{ color: Colors.text_secondary, fontSize: 13 }}>date : {newsData.publishedAt} </Text>
+                      <Text style={{ color: Colors.text_secondary, fontSize: 13, marginTop:20 }}>date : {newsData.publishedAt} </Text>
                   </View>
+                 
               </View>
+
+              <View style={{ marginTop: 20}}>
+                    <Text style={{ color: Colors.white, fontSize: 25}}>Description</Text>
+                    <Text style={{ color: Colors.white, fontSize: 18, marginTop: 10}}>{newsData.description}</Text>
+                  </View>
 
           </View>
 
@@ -96,18 +88,32 @@ function renderNewsProfile() {
 
   return (
     <View style={styles.mainContainer}>
-    <ImageBackground
-        source={Images.profile}
-        resizeMode="cover"
-        imageStyle={{ borderBottomLeftRadius: 30, borderBottomRightRadius: 30 }}
-        style={{ flex: 1.5, width: '100%', height: '100%' }}
-        >
-        {renderHeaderBar()}
-    </ImageBackground>
+      {
+        newsData.urlToImage ? (
+          <ImageBackground
+          source={{uri : newsData?.urlToImage}}
+          resizeMode="cover"
+          imageStyle={{ borderBottomLeftRadius: 30, borderBottomRightRadius: 30 }}
+          style={{ flex: 1.5, width: '100%', height: '100%' }}
+          >
+          {renderHeaderBar()}
+      </ImageBackground>
+        ) : (
+          <ImageBackground
+          source={{  uri: 'https://via.placeholder.com/200'}}
+          resizeMode="cover"
+          imageStyle={{ borderBottomLeftRadius: 30, borderBottomRightRadius: 30 }}
+          style={{ flex: 1.5, width: '100%', height: '100%' }}
+          >
+          {renderHeaderBar()}
+      </ImageBackground>
+        )
+      }
+  
     <View style={{ flex: 2, backgroundColor: Colors.primary, width: '100%' }}>
         {renderNewsProfile()}
        
-        <View style={{marginTop:10}} />
+        <View style={{marginTop:20}} />
     </View>
 
 </View>
