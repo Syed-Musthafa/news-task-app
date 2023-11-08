@@ -1,6 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import RssParser from 'react-native-rss-parser';
 
 
 type InitialState = {
